@@ -1,0 +1,9 @@
+services:
+  openldat:
+    image: openldat:latest
+    container_name: openldat
+    command: /bin/bash
+    build: .
+    privileged: true
+    volumes:
+      - "..:/openldat"

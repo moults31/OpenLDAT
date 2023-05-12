@@ -1,0 +1,44 @@
+FROM ubuntu:22.04
+
+LABEL maintainer="moults31@gmail.com"
+LABEL version="0.1"
+LABEL description="This image provides build dependencies for OpenLDAT, including the Arduino firmware and the java app"
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Install any apt packages needed
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    # Base
+    sudo \
+    nano \
+    curl \
+    dumb-init \
+    gosu \
+    libssl-dev \
+    ca-certificates \
+    unzip \
+    # For serial monitor
+    picocom \
+    # For flashing firmware to Elite C
+    dfu-programmer \
+    # Cleanup
+    && apt-get autoremove -y \
+    && apt-get clean \
+    && apt-get autoclean \
+    && rm -rf /var/lib/apt/lists/* \
+    && update-ca-certificates
+
+# Install arduino cli
+RUN curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=/usr/local/bin sh
+
+# Add Sparkfun URL to get access to Pro Micro and Elite C board configs
+RUN /usr/local/bin/arduino-cli config init --additional-urls https://raw.githubusercontent.com/sparkfun/Arduino_Boards/main/IDE_Board_Manager/package_sparkfun_index.json
+RUN /usr/local/bin/arduino-cli core update-index
+RUN /usr/local/bin/arduino-cli core install sparkfun:avr
+RUN /usr/local/bin/arduino-cli core install arduino:avr
+
+WORKDIR '/openldat'
+
+ADD ./entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]

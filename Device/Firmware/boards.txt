@@ -38,3 +38,28 @@ openldat.build.board=AVR_LEONARDO
 openldat.build.core=arduino
 openldat.build.variant=leonardo
 openldat.build.extra_flags={build.usb_flags}
+
+##############################################################
+
+openldatEliteC.name=OpenLDAT Model 1C
+openldatEliteC.vid.0=0x2341
+openldatEliteC.pid.0=0x0036
+openldatEliteC.vid.1=0x2341
+openldatEliteC.pid.1=0x8036
+openldatEliteC.vid.2=0x2A03
+openldatEliteC.pid.2=0x0036
+openldatEliteC.vid.3=0x2A03
+openldatEliteC.pid.3=0x8036
+openldatEliteC.vid.4=0x4370
+openldatEliteC.pid.4=0x0001
+
+openldatEliteC.build.mcu=atmega32u4
+openldatEliteC.build.f_cpu=16000000L
+openldatEliteC.build.vid=0x1b4f
+openldatEliteC.build.pid=0x0001
+openldatEliteC.build.usb_product="OpenLDAT Model 1C"
+openldatEliteC.build.board=AVR_PROMICRO
+openldatEliteC.build.core=arduino:arduino
+openldatEliteC.build.variant=promicro
+openldatEliteC.build.extra_flags={build.usb_flags}
+openldatEliteC.build.usb_product="SparkFun Elite C"
