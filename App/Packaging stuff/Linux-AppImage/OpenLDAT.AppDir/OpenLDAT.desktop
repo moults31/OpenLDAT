@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=OpenLDAT
+Comment=Display and system latency metrics
+Exec=AppRun
+Icon=OpenLDAT
+Type=Application
+Categories=Graphics;

@@ -1,0 +1,21 @@
+<h2>Microstuttering detection</h2>
+<br/><br/>
+<center><img src="seizureWarning.png" width="!AUTO!250" height="!AUTO!46.25"/></center>
+<br/><br/>
+<p>
+    When the screen is running at a non-native refresh rate (for instance, if you overclocked a 60Hz panel to 64Hz), it may cause microstuttering by either skipping or repeating frames.<br/>
+    Microstuttering is very noticeable during smooth animations, such as a slowly panning camera. It appears as jitters or unsmooth animation. Most of the time, microstuttering is caused by the application itself (texture and level streaming, poor coding, etc.) or by an unoptimized GPU driver. This test allows you to detect whether the display itself is causing microstuttering or not.<br/><br/>
+    This test takes approximately 10 seconds to complete.
+</p>
+<p>
+    <b>Important</b>:<ul>
+        <li>This test will flicker the screen as fast possible. On a typical 60Hz panel, it will generate a 30Hz flashing. While this frequency is too high to trigger seizures, if you're sensitive to flashing lights, you should look away during the test.</li>
+        <li>Some IPS panels will flicker slightly for several minutes after running this test. If that's the case for your panel, don't run the test too many times in a row to avoid damaging it.</li>
+        <li>If you see vertical stripes instead of flickering, you turned off VSync in the video driver, let the application control it</li>
+        <li>Due to the precise timing required for this test, it can only be performed with the OpenGL backend. Platforms that don't support OpenGL cannot run the test.</li>
+    </ul>
+</p>
+<h6>PWM, Strobing and other noise</h6>
+<p>
+This test generally gives fairly accurate results even if PWM backlights are used or some other similar noise is present. However, if possible, it should be turned off for improved accuracy.
+</p>

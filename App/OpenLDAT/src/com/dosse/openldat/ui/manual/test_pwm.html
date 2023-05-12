@@ -1,0 +1,30 @@
+<h2>PWM / Strobing detection</h2>
+<p>
+This test is designed to detect the stability of the backlight of your display.<br/>
+Most of the tests in this application will not work if the backlight is not stable.<br/><br/>
+This test takes approximately 10 seconds to complete.
+</p>
+<br/><br/>
+<h6>What is PWM?</h6>
+<p>
+    Some (cheap) panels do not have a dimmable backlight, so they "pretend" that they do by pulsing it on and off very quickly. By changing the duty cycle of this pulse (how long it stays on versus how long it stays off), different brightness levels can be achieved, and if the frequency is high enough, the human eye generally cannot see, but it causes eye strain and headaches over the long term.<br/>
+    If your display has this type of backlight, setting the brightness to maximum will usually disable it and allow you to run the tests and get accurate results.<br/><br/>
+    <a href="whatIsPWM.html">More about PWM</a>
+</p>
+<br/><br/>
+<h6>What is Black Frame Insertion?</h6>
+<p>
+    Black Frame Insertion is a common feature in modern high refresh rate gaming displays. It attempts to reduce ghosting caused by pixel response times by displaying a black frame between each "real" frame.<br/>
+    This feature should be turned off before running any test in this application.<br/>
+</p>
+<br/><br/>
+<h6>Note on CRT displays</h6>
+<p>
+    CRT displays have an extremely noticeable flickering caused by the way they refresh the screen with an electron beam. Using this type of display is not recommended with this application.<br/>
+</p>
+<br/><br/>
+<h6>Other types of noise</h6>
+<p>
+    Some older panels may have a dying backlight that flickers randomly. This will interfere with the tests.<br/>
+    Electromagnetic interference from power supplies, inverters, etc. may also get picked up by the device and cause inaccurate results. If too much interference is present, the test will be stopped.
+</p>

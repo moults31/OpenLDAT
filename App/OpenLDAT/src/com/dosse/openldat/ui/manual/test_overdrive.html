@@ -1,0 +1,22 @@
+<h2>Pixel Overdrive measurement</h2>
+<br/><br/>
+<center><img src="seizureWarning.png" width="!AUTO!250" height="!AUTO!46.25"/></center>
+<br/><br/>
+<p>
+<a href="whatIsOverdrive.html">Pixel Overdrive</a> is a technique typically used to improve Pixel Response Time in gaming monitors. Excessive overdrive creates inverse ghosting artifacts, visible as dark trails behind moving objects.<br/>
+This test measures how much the display overshoots or undershoots transitions between shades of grey. There is no standard for this, so different products and test suites may calculate this differently.<br/>
+This test takes 1-5 minutes to complete depending on the chosen settings.<br/><br/>
+The following settings are available:<ul>
+    <li><b>Method</b>: There is no official standard on how overshoot and undershoot should be measured, so two options are available:<ul>
+        <li><b>Relative</b>: overshoot/undershoot is measured as the difference between the intended target color and the peak of the overshoot/undershoot measured during the transition, divided by the range of the transition. For instance, if during a transition from 10 to 20 we reach 25, that's an overshoot of 5 over a range of 10, so it's 50%.</li>
+        <li><b>Absolute</b>: overshoot/undershoot is measured as the difference between the intended target color and the peak of the overshoot/undershoot measured during the transition, divided by the full range of brightness of the display. For instance, if during a transition from 10 to 20 we reach 25, and the display can show brightness levels from 5 to 200, that's an overshoot of 5 over a range of 195, so it's 2.56%. <b>This is the suggested method.</b></li>
+    </ul>
+    <li><b>Step size</b>: smaller steps means that more shades of grey are tested, but the test will take longer. Possible values are 16 (slowest), 32 (balanced), 64 (fast).</li>
+    <li><b>Skip transitions to 0 and 255</b>: When using full range RGB (and you should), skip measuring the transitions to 0 and 255, since most displays cannot possibly show a blacker black or a whiter white during the transition.</li>
+</ul>
+</p>
+<br/><br/>
+<h6>PWM, Strobing and other noise</h6>
+<p>
+The accuracy of this test is reduced if PWM backlights are used or some other similar noise is present. If possible, it should be turned off to get better results.
+</p>

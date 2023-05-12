@@ -1,0 +1,42 @@
+<h2>Allowing access to serial devices on Linux</h2>
+<p>
+    To communicate with the OpenLDAT sensor device, your user must be allowed access to serial devices.<br/>
+    Typically, it involves adding your user to one of these groups: uucp, dialout, lock, tty.<br/>
+    Note: your user must be an administrator to do this (must be allowed to run sudo)
+</p>
+<br/><br/>
+<h6>Arch, Manjaro, etc.</h6>
+<p>
+    Open a terminal and run this command:<br/>
+    <pre>sudo usermod -a -G uucp $(whoami)</pre><br/>
+    Now reboot the machine and OpenLDAT should work.
+</p>
+<br/><br/>
+<h6>Debian, Ubuntu, etc.</h6>
+<p>
+    Open a terminal and run this command:<br/>
+    <pre>sudo usermod -a -G dialout $(whoami)</pre><br/>
+    Now reboot the machine and OpenLDAT should work.
+</p>
+<br/><br/>
+<h6>OpenSUSE and similar</h6>
+<p>
+    Open a terminal and run this command:<br/>
+    <pre>sudo usermod -a -G dialout,lock,tty $(whoami)</pre><br/>
+    Now reboot the machine and OpenLDAT should work.
+</p>
+<br/><br/>
+<h6>Fedora, Red Hat, etc.</h6>
+<p>
+    Open a terminal and run this command:<br/>
+    <pre>sudo usermod -a -G dialout,lock $(whoami)</pre><br/>
+    Now reboot the machine and OpenLDAT should work.
+</p>
+<br/><br/>
+<h6>Other distros</h6>
+<p>
+    Refer to your distro's documentation on how to access serial devices.<br/>
+    If you can't find it, search for instructions on how to use Arduino IDE on your distro, it will probably explain you how to do it.<br/>
+    If you still can't find anything, look for instructions on how to create custom udev rules, and add a rule to allow all users access to USB devices with VID 4370.<br/><br/>
+    As a last resort, simply run OpenLDAT with sudo.
+</p>

@@ -1,0 +1,47 @@
+<h2>Input Lag measurement</h2>
+<h4>Manual test</h4>
+<p>
+    This test allows you to manually test the <a href="whatIsTSL.html">Total System Latency</a> of a game or even another system, also known as Input Lag.
+</p>
+<br/><br/>
+<h6>Setting up the test</h6>
+<p>
+    To run the test you'll need:<ul>
+    <li>A <b>TEST MACHINE</b> running this application, to which the OpenLDAT device is connected</li>
+    <li>A <b>TARGET MACHINE</b> that runs the game or application that you want to measure. This can be any device that can take clicks, but can't run the OpenLDAT application (for instance, a game console, a cloud gaming service, etc.)</li>
+    <li>The <b>MODIFIED MOUSE</b> described in the documentation (optional)</li>
+    </ul>
+    To begin the test:<ul>
+        <li>Keep the OpenLDAT device connected to the TEST MACHINE</li>
+        <li>If the TEST MACHINE and the TARGET MACHINE are the same, you don't need the MODIFIED MOUSE and the OpenLDAT device can be used as the click source, otherwise:<ul>
+                <li>Connect the 2 wires from the MODIFIED MOUSE to the external input of the OpenLDAT device</li>
+                <li>Connect the USB from the MODIFIED MOUSE to the TARGET MACHINE</li>
+            </ul>
+        </li>
+        <li>Position the OpenLDAT device on the screen of the TARGET MACHINE; you need to place it in a place that will change brightness when the mouse is clicked. A muzzle flash is usually a good choice.</li>
+    </ul>
+    During the test:<ul>
+        <li>If using the MODIFIED MOUSE, click the mouse at a speed of about 1 click per second</li>
+        <li>Adjust the sensitivity and the green trigger level to make sure the flashes are detected properly</li>
+        <li>Repeat at least 10-20 times to get a good average</li>
+    </ul>
+</p>
+<br/><br/>
+<h6>General tips</h6>
+<ul>
+    <li>For accurate results, get in a situation where clicking the mouse will immediately generate a flash on the screen, without doing any animation first.</li>
+    <li>If you captured some garbage data while adjusting the sensitivity and trigger level, reset the test and repeat.</li>
+    <li>Don't click the mouse too quickly, especially if there's noticeable input lag.</li>
+    <li>Acceptable levels of input lag in video games are below 150ms, anything higher will severly impact your accuracy. The lower the better.</li>
+    <li>If the backlight of the display of the TARGET MACHINE is strobing, it will impact the accuracy of the test. Use the PWM/Strobing detection easily detect this.</li>
+</ul>
+<br/><br/>
+<h6>PWM, Strobing and other noise</h6>
+<p>
+This test generally gives very accurate results even if PWM backlights are used or some other similar noise is present. However, if possible, it should be turned off for improved accuracy.
+</p>
+<br/><br/>
+<h6>Blinking LED</h6>
+<p>
+The LED on the front of the sensor device will blink during this test when a click is generated. If you have a high speed camera, you can use this to verify the data reported by this app.
+</p>

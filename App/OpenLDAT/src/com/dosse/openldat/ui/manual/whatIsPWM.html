@@ -1,0 +1,21 @@
+<h2>What is PWM?</h2>
+<p>
+PWM (Pulse-Width Modulation) is a technique used to control the brightness of LEDs that are not dimmable. Backlights using this technique are usually found on cheaper panels.<br/>
+The basic idea is that if you have a light that can only be turned on and off, you can create the illusion of intermediate brightness levels by turning it on and off very quickly, and depending on how long it stays on compared to how long it stays off, it will appear brighter or darker. If this is done quickly enough, the strobing won't be visible to the human eye, and the illusion works, but it is still very much detectable by instruments that are fast enough.
+</p>
+<p>
+The following chart shows how a brightness level of 90% may be implemented by using PWM. The horizontal axis is time, the vertical axis is light.<br/>
+<center><img src="pwm.png" width="!AUTO!160" height="!AUTO!76" /></center>
+To achieve a brightness of 90%, the light stays on 90% of the time, and off 10% of the time. The percentage of time that the light stays on is called duty cycle.
+</p>
+<p>
+Typical PWM backlights operate at 240 Hz, the frequency indicates how many times per second the light is turned on and off. At 240 Hz, a cycle takes ~4.16 milliseconds. This is generally considered invisible to an untrained eye, but it can be observed by waving your hand in front of the screen when it's white: if you see multiple copies appear, PWM is present (and it's slow enough for your eyes to see). Modern smartphones with slow motion cameras may also be able to pick up PWM, if the camera is fast enough.<br/>
+In the previous example, for a duty cycle of 90% at 240 Hz, the light will have to stay on for 3.744 milliseconds, then off for 0.416 milliseconds, and repeat.<br/>
+PWM backlights, regardless of frequency, are generally regarded as a bad thing, as they can cause eye strain.
+</p>
+<p>
+The applications of PWM extend far beyond display backlights, it is also used to control electrical motors, transformers, audio amplifiers, and is generally used whenever something digital needs to control something analog.
+</p>
+<p>
+<center><a href="!BACK!">Go back</a></center><br/>
+</p>

@@ -1,0 +1,45 @@
+<h2>Input Lag measurement</h2>
+<h4>Automated test</h4>
+<br/><br/>
+<center><img src="seizureWarning.png" width="!AUTO!250" height="!AUTO!46.25"/></center>
+<br/><br/>
+<p>
+    This test measures <a href="whatIsTSL.html">Total System Latency</a>, also known as Input Lag, the time that passes between a button press and something happening on the screen.<br/>
+</p>
+<p>
+    To simulate a variety of scenarios that a user might encounter, several settings are available:
+    <ul>
+        <li><b>VSync mode</b>: Vertical synchronization prevents tearing in the image by making sure that the GPU only sends a new frame to the display while the display is not drawing the previous one. This introduces a delay that depends on the framerate, the refresh rate of the screen, and how VSync is implemented.</li>
+        <li><b>Fake CPU load</b>: This setting simulates a load on the CPU. Games usually take a few milliseconds per frame for all their internal processing before rendering.</li>
+        <li><b>Fake GPU load</b>: This setting simulates a load on the GPU. This can be used to simulate the complexity of drawing a scene in a game.</li>
+        <li><b>Test duration</b>: Longer tests will provide more accurate results. 1 minute is recommended in most cases.</li>
+    </ul>
+    <b>Note</b>: Some of these options are only available when using the OpenGL backend. A Swing backend is provided for platforms that don't support OpenGL, but its behavior is controlled by the system.
+</p>
+<br/><br/>
+<h6>VSync modes</h6>
+<p>
+    This test implements the following modes for VSync:
+    <ul>
+    <li><b>Off</b>: This is the mode favored by competitive gamers. It allows the game to run as fast as the hardware allows it to get lower latency, at the cost of image tearing, increased heat, and sometimes bugs.</li>
+    <li><b>On</b>: Traditional VSync. The application draws to a buffer then waits for the screen to be ready before displaying it. This mode limits the application framerate to the refresh rate of the display, therefore introducing up to a full screen refresh of latency, and the framerate is, that also introduces input delay. Note that the video driver may force triple buffering and/or prerendering of frames, introducing additional delay.</li>
+    <li><b>On (alternative implementation)</b>: Another implementation of VSync that may reduce latency in some cases by letting the desktop compositor handle VSync. May not be supported by all hardware and software combinations.</li>
+    </ul>
+    <b>Note</b>: like most modern games, the test will run in what is usually called "Borderless fullscreen" and not "Exclusive fullscreen".
+</p>
+<br/><br/>
+<h6>Fake CPU and GPU loads</h6>
+<p>
+    Games generally put more load on the system than this test does. These options allows simulating a load on the CPU and GPU during the test, to see how latency changes with it.<br/>
+    Obviously, enabling these options limits the maximum framerate that the application can achieve.
+</p>
+<br/><br/>
+<h6>PWM, Strobing and other noise</h6>
+<p>
+This test generally gives very accurate results even if PWM backlights are used or some other similar noise is present. However, if possible, it should be turned off for improved accuracy.
+</p>
+<br/><br/>
+<h6>Blinking LED</h6>
+<p>
+The LED on the front of the sensor device will blink during this test when a click is generated. If you have a high speed camera, you can use this to verify the data reported by this app.
+</p>

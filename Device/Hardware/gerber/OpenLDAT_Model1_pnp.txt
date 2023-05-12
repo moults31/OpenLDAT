@@ -1,0 +1,24 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=Untitled Sketch 4
+*Date=20:24:39
+*CreatedBy=Fritzing 0.9.4.2019-12-01.CD-498
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;1k;THT;14.0053;-8.95096;90;Bottom;R1
+2;;5 mm [THT];19.0854;-4.60742;180;Bottom;LED1
+3;330k;THT;8.92528;-26.731;-90;Bottom;R3
+4;47k;THT;14.0053;-26.731;-90;Bottom;R5
+5;1M;THT;8.92528;-14.031;90;Bottom;R2
+6;22k;THT;11.4653;-26.731;-90;Bottom;R4
+7;;;11.4653;-34.8969;180;Bottom;PT19
+8;;THT;5.11528;-3.87096;90;Bottom;Button
+9;;;11.4653;-24.191;0;Bottom;MCU

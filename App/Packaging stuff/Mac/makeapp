@@ -1,0 +1,19 @@
+#!/bin/bash
+# using https://github.com/Jorl17/jar2app
+# using https://github.com/tofi86/universalJavaApplicationStub
+# run /usr/libexec/java_home -V to see your multiple jdks installation path
+JAVAPATH="./jre/openjdk-11-jre/Contents"
+JARPATH="./openldat/OpenLDAT.jar"
+LIBPATH="./openldat/lib"
+APPNAME="OpenLDAT"
+BUNDLENAME="com.dosse.openldat"
+VERSION="1.0.0"
+LICENSE="GNU GPL v3"
+ICONNAME="icon.icns"
+
+cd "${0%/*}" # sets the working dir to where this script is located
+rm -fr "out/$APPNAME.app"
+jar2app "$JARPATH" -r "$JAVAPATH" -i "$ICONNAME" -b "$BUNDLENAME" -v "$VERSION" -s "$VERSION" -c "$LICENSE" -o "out/$APPNAME.app"
+
+cp -r "$LIBPATH" "./out/$APPNAME.app/Contents/Java/"
+cp "universalJavaApplicationStub" "./out/$APPNAME.app/Contents/MacOS/JavaAppLauncher"

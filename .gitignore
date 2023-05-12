@@ -1,0 +1,5 @@
+_OLD/
+Private/
+App/OpenLDAT/dist/*
+App/OpenLDAT/build/
+App/OpenLDAT/nbproject/private

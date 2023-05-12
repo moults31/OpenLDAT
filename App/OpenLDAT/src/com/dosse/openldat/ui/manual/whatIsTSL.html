@@ -1,0 +1,24 @@
+<h2>
+    What is Total System Latency?
+</h2>
+<p>
+    Total System Latency is the amount of time that passes between a user pressing a key, and an action being displayed on the screen. Understanding the causes of this delay and minimizing them is important for competitive gamers.<br/><br/>
+    There are many factors involved in this:<ul>
+        <li><b>Delay in the peripheral and USB communication</b>: the time it takes for the controller on the peripheral to detect the button press, the time it takes to encode this information, the transmission time, the time it takes for the USB controller on the machine to decode the message and send it to the OS. This is generally less than 1ms for USB devices, but it can be higher for lower end and wireless peripherals. Higher polling rates can reduce this.</li>
+        <li><b>OS and driver delays</b>: the OS periodically polls the USB controller for new information, typically at 1000Hz; when new data is available, it has to be processed by the driver, the OS, and sent to the right application. The delay introduced by this is usually negligible on modern hardware.</li>
+        <li><b>Processing time by the application</b>: the time it takes for the CPU running the application to process the input before it starts drawing the effects of it. This is variable depeding on framerate, CPU speed, and how the application itself was coded.</li>
+        <li><b>Rendering time</b>: the time it takes for the GPU to render the new frame. This depends mostly on GPU speed and how the application was coded.</li>
+        <li><b>Double or triple buffering</b>: applications cannot draw directly to the framebuffer, because that contains the frame currently being sent to the screen, so they draw to a second framebuffer and swap the framebuffer when rendering is complete. Triple buffering makes this process a queue with 3 slots instead of a simple swap for a smoother experience. Double buffering introduces a latency of the time it takes the GPU to draw one frame, Triple buffering introduces two frames of latency.</li>
+        <li><b>Desktop compositor</b>: Depending on how the desktop compositor is implemented and configured, it can introduce up to a screen refresh of latency. Applications running in "exclusive fullscreen" are not affected by this. This isn't a problem on modern versions of Windows.</li>
+        <li><b>VSync</b>: if VSync is enabled, it introduces up to one screen refresh of latency, unless the monitor supports variable refresh rate, in which case latency is only introduced if the framerate is outside of the monitor's range of supported refresh rates.</li>
+        <li><b>Video driver</b>: depending on how the video driver is configured, it can introduce additional latency, for instance, by allowing prerendering of future frames</li>
+        <li><b>Adapters</b>: anything between the GPU and the display, such as HDMI to VGA adapters, can introduce latency up to several screen refreshes. Avoid them.</li>
+        <li><b>Display processing</b>: most modern LCD displays introduce at least one screen refresh of latency because they need to have the entire frame from the GPU before they can display it. Some monitors don't do this when running at their native resolution. Older CRT displays do not have this issue.</li>
+        <li><b>Display refresh rate</b>: displays with higher refresh rates (such as modern 144Hz gaming monitors) can draw more frames per second compared to typical 60Hz monitors, therefore lowering the screen refresh time in all the steps mentioned above.</li>
+        <li><b>Panel update time</b>: the time it takes for the display to draw the frame (usually from top to bottom). On modern displays this is usually about half of a screen refresh. Monitors with high panel update times generate a noticeable "wobbly" effect when dragging windows horizontally.</li>
+        <li><b>Pixel response time</b>: the time it takes for pixels to change colors. This is usually between 1ms and 5ms on a modern display.</li>
+    </ul>
+</p>
+<p>
+    <center><a href="!BACK!">Go back</a></center><br/>
+</p>
