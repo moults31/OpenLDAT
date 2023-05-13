@@ -2,7 +2,7 @@ services:
   openldat:
     image: openldat:latest
     container_name: openldat
-    command: /bin/bash
+    command: zsh
     build: .
     privileged: true
     volumes:

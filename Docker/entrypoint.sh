@@ -11,7 +11,7 @@ if [ -d /openldat ]; then
         unzip -q $LIB_ZIP_PATH -d $FW_ROOT_PATH
     fi
 
-    exec gosu $(whoami) dumb-init "$@"
+    dumb-init "$@"
 else
     echo "Fatal! User must pass -v </path/to/openldat/repo>:$DIRECTORY"
     exit 1
