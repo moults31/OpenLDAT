@@ -62,4 +62,3 @@ openldatEliteC.build.board=AVR_PROMICRO
 openldatEliteC.build.core=arduino:arduino
 openldatEliteC.build.variant=promicro
 openldatEliteC.build.extra_flags={build.usb_flags}
-openldatEliteC.build.usb_product="SparkFun Elite C"

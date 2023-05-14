@@ -61,7 +61,7 @@ public class Device {
         this.com = com;
         String name = com.getPortDescription().toLowerCase().trim();
         if (name.startsWith("openldat ")) {
-            if (name.equals("openldat model 1") || name.equals("openldat prototype")) {
+            if (name.equals("openldat model 1") || name.equals("openldat model 1c") ||  name.equals("openldat prototype")) {
                 //supported, model 1
                 model = 1;
                 if (!com.openPort(100, 2, 131072)) {

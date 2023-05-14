@@ -20,12 +20,16 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
+# Give it access to tty ports
+RUN usermod -a -G dialout $USERNAME
+
 # Install any apt packages needed
 RUN apt-get update && apt-get install --no-install-recommends -y \
     # Base
     sudo \
     nano \
     curl \
+    wget \
     dumb-init \
     gosu \
     libssl-dev \
@@ -33,6 +37,13 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     unzip \
     git \
     zsh \
+    # For building the Java app
+    ant \
+    # For running the Java app
+    libxext-dev \
+    libxrender-dev \
+    libxtst6 \
+    libxi6 \
     # For serial monitor
     picocom \
     # For flashing firmware to Elite C
@@ -67,5 +78,13 @@ RUN /usr/local/bin/arduino-cli config init --additional-urls https://raw.githubu
 RUN /usr/local/bin/arduino-cli core update-index
 RUN /usr/local/bin/arduino-cli core install sparkfun:avr
 RUN /usr/local/bin/arduino-cli core install arduino:avr
+
+# Download and configure JDK (>= 11 works, latest is most painless)
+RUN mkdir ~/jdk-20-latest \
+    && curl -L -b "oraclelicense=a" https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.tar.gz -O \
+    && mkdir ./jdk-20-latest \
+    && tar zxvf jdk-20_linux-x64_bin.tar.gz -C ~/jdk-20-latest --strip-components=1 \
+    && echo "platform.active=JDK_20" >> ~/.properties \
+    && echo "platforms.JDK_20.home=/home/$USERNAME/jdk-20-latest" >> ~/.properties
 
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]

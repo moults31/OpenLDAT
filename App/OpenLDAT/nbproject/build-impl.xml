@@ -1260,13 +1260,13 @@ is divided into following sections:
         <condition else=" ${main.class}" property="jar.usage.message.main.class" value=" -m ${module.name}${jar.usage.message.main.class.class.selector}">
             <isset property="named.module.internal"/>
         </condition>
-        <condition else="" property="jar.usage.message" value="To run this application from the command line without Ant, try:${line.separator}${platform.java}${jar.usage.message.module.path}${jar.usage.message.class.path}${jar.usage.message.main.class}">
+        <condition else="" property="jar.usage.message" value="# To run this application from the command line without Ant, try:${line.separator}${platform.java}${jar.usage.message.module.path}${jar.usage.message.class.path}${jar.usage.message.main.class}">
             <isset property="main.class.available"/>
         </condition>
         <condition else="debug" property="jar.usage.level" value="info">
             <isset property="main.class.available"/>
         </condition>
-        <echo level="${jar.usage.level}" message="${jar.usage.message}"/>
+        <echo level="${jar.usage.level}" file="${build.dir}/app-run.sh" append="false" message="${jar.usage.message}"/>
     </target>
     <target depends="-do-jar-copylibs" if="do.archive" name="-do-jar-delete-manifest">
         <delete>

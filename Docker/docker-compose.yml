@@ -7,3 +7,6 @@ services:
     privileged: true
     volumes:
       - "..:/openldat"
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=$DISPLAY
