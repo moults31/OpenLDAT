@@ -48,6 +48,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     picocom \
     # For flashing firmware to Elite C
     dfu-programmer \
+    # For building + running host-side app
+    openjdk-21-jdk \
     # Cleanup
     && apt-get autoremove -y \
     && apt-get clean \
@@ -79,12 +81,8 @@ RUN /usr/local/bin/arduino-cli core update-index
 RUN /usr/local/bin/arduino-cli core install sparkfun:avr
 RUN /usr/local/bin/arduino-cli core install arduino:avr
 
-# Download and configure JDK (>= 11 works, latest is most painless)
-RUN mkdir ~/jdk-20-latest \
-    && curl -L -b "oraclelicense=a" https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.tar.gz -O \
-    && mkdir ./jdk-20-latest \
-    && tar zxvf jdk-20_linux-x64_bin.tar.gz -C ~/jdk-20-latest --strip-components=1 \
-    && echo "platform.active=JDK_20" >> ~/.properties \
-    && echo "platforms.JDK_20.home=/home/$USERNAME/jdk-20-latest" >> ~/.properties
+# Configure JDK (>= 11 works, latest is most painless)
+RUN echo "platform.active=JDK_21" >> ~/.properties \
+    && echo "platforms.JDK_21.home=/usr/lib/jvm/java-21-openjdk-amd64" >> ~/.properties
 
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]

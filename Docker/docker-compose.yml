@@ -8,5 +8,6 @@ services:
     volumes:
       - "..:/openldat"
       - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/bus/usb:/dev/bus/usb
     environment:
       - DISPLAY=$DISPLAY
