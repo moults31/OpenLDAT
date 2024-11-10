@@ -1,20 +1,73 @@
 # OpenLDAT
 OpenLDAT is a Free and Open Source solution to measure and analyze display latency metrics, similar to Nvidia LDAT.
 
-We're still working on it, so come back later if you're interested :)
+This is a fork that is used under license but not affiliated with the original whose homepage is https://openldat.fdossena.com
 
-## License
-Copyright (C) 2021 Federico Dossena
+# Usage
+The wiki contains concrete, practical usage showcases.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+>[!TIP]
+>Please see the wiki: https://github.com/moults31/OpenLDAT/wiki
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/gpl-3.0>.
+# Quickstart
+## Software
+This repo provides a docker image that bundles all dependencies for both the firmware and the app software.
+
+### Starting a docker container
+In your OpenLDAT clone:
+```
+$ cd Docker
+$ docker compose run openldat
+```
+
+Expected output:
+```
+Success! Found /openldat
+openldat-dev ●
+```
+
+### Firmware
+This section assumes you are using the arduino firmware in this repo that targets the Elite C board with atmega32u4 MCU.
+
+#### Build
+```
+openldat-dev ● Scripts/fw-build.sh
+```
+
+#### Flash
+Quickly short RST to GND on the Elite C board two times within a ~1 second window using tweezers or similar to activate DFU mode. Then:
+
+```
+openldat-dev ● sudo -E ./Scripts/fw-flash.sh
+```
+
+Expect output:
+```
+Flash script invoking dfu-programmer for Elite C.
+Note: This script REQUIRES sudo for accessing the device!
+Validating...
+8076 bytes used (28.17%)
+```
+
+### App Software
+#### Build
+```
+openldat-dev ● Scripts/app-build.sh
+```
+
+Expect output:
+```
+BUILD SUCCESSFUL
+Total time: 2 seconds
+```
+
+#### Run
+```
+openldat-dev ● Scripts/app-run.sh
+```
+
+Expect to see a GUI program similar to https://github.com/moults31/OpenLDAT/wiki#result-in-openldat-java-app
+
+## Hardware
+To build the physical OpenLDAT device, refer to the [Fritzing Model](Device/Hardware/OpenLDAT_Model1.fzz) provided by the original OpenLDAT creator.
