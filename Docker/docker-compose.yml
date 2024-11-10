@@ -5,6 +5,7 @@ services:
     command: zsh
     build: .
     privileged: true
+    network_mode: "host"
     volumes:
       - "..:/openldat"
       - /tmp/.X11-unix:/tmp/.X11-unix

@@ -44,6 +44,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libxrender-dev \
     libxtst6 \
     libxi6 \
+    # A desktop to run the Java app in
+    xfce4 \
+    xfce4-goodies \
+    tightvncserver \
+    dbus-x11 \
+    xfonts-base \
     # For serial monitor
     picocom \
     # For flashing firmware to Elite C
@@ -84,5 +90,10 @@ RUN /usr/local/bin/arduino-cli core install arduino:avr
 # Configure JDK (>= 11 works, latest is most painless)
 RUN echo "platform.active=JDK_21" >> ~/.properties \
     && echo "platforms.JDK_21.home=/usr/lib/jvm/java-21-openjdk-amd64" >> ~/.properties
+
+# Bypass need for vnc server password
+RUN mkdir /home/$USERNAME/.vnc \
+    && echo "" | vncpasswd -f > /home/$USERNAME/.vnc/passwd \
+    && chmod 600 /home/$USERNAME/.vnc/passwd
 
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
