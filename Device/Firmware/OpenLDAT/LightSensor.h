@@ -16,6 +16,8 @@
 #define FEATURE_HIGHSENS2 0b01000000 //increases sensor gain (msb)
 //#define FEATURE_7       0b10000000
 
+#define PIN_BUTTON_INPUT 7
+
 #define BUTTON_DEBOUNCE_MS 200
 volatile byte buttonPressed = 0;
 unsigned long lastButtonISR = 0;
@@ -23,7 +25,7 @@ void buttonISR() {
   unsigned long t = millis();
   unsigned long tdiff = t - lastButtonISR;
   if (tdiff >= BUTTON_DEBOUNCE_MS) {
-    if(PINE&0x40){
+    if(!digitalRead(PIN_BUTTON_INPUT)){
       buttonPressed = 1;
       Mouse.press(MOUSE_LEFT);
     }else{
@@ -34,7 +36,7 @@ void buttonISR() {
 }
 
 void autofireISR() {
-  if(PINE&0x40){
+  if(!digitalRead(PIN_BUTTON_INPUT)){
     buttonPressed = 1;
     Mouse.press(MOUSE_LEFT);
   }else{
@@ -46,13 +48,13 @@ void buttonISR_noclick() {
   unsigned long t = millis();
   unsigned long tdiff = t - lastButtonISR;
   if (tdiff >= BUTTON_DEBOUNCE_MS) {
-    if(PINE&0x40) buttonPressed = 1;
+    if(!digitalRead(PIN_BUTTON_INPUT)) buttonPressed = 1;
   }
   lastButtonISR = t;
 }
 
 void autofireISR_noclick() {
-  if(PINE&0x40) buttonPressed = 1;
+  if(!digitalRead(PIN_BUTTON_INPUT)) buttonPressed = 1;
 }
 
 
@@ -66,7 +68,7 @@ void lightSensor_resetPins() {
   //deatach ISR (if any)
   detachInterrupt(digitalPinToInterrupt(7));
   //set pin 7 as input for button/autofire
-  pinMode(7, INPUT);
+  pinMode(PIN_BUTTON_INPUT, INPUT);
   //set pins 14,15 to high impedance (max sensitivity)
   pinMode(14, INPUT);
   pinMode(15, INPUT);
@@ -201,12 +203,12 @@ void lightSensor(byte flags) {
       TCNT4H = 0;
       TCNT4 = 0;
       interrupts();
-      attachInterrupt(digitalPinToInterrupt(7), (flags&FEATURE_NOCLICK)?autofireISR_noclick:autofireISR, CHANGE);
+      attachInterrupt(digitalPinToInterrupt(PIN_BUTTON_INPUT), (flags&FEATURE_NOCLICK)?autofireISR_noclick:autofireISR, CHANGE);
     } else {
       //enable button power
       pinMode(4, OUTPUT);
       digitalWrite(4, HIGH);
-      attachInterrupt(digitalPinToInterrupt(7), (flags&FEATURE_NOCLICK)?buttonISR_noclick:buttonISR, CHANGE);
+      attachInterrupt(digitalPinToInterrupt(PIN_BUTTON_INPUT), (flags&FEATURE_NOCLICK)?buttonISR_noclick:buttonISR, CHANGE);
     }
   }
   //configure ADC
