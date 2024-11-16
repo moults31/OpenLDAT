@@ -7,6 +7,8 @@ edition = "2021"
 cortex-m = "0.7.7"
 cortex-m-rt = "0.7.5"
 embedded-hal = "1.0.0"
+embedded_hal_0_2 = { package = "embedded-hal", version = "0.2.5", features = ["unproven", ] }
+itoa = "1.0.11"
 panic-halt = "1.0.0"
 rp-pico = "0.9.0"
 usb-device = "0.3.2"

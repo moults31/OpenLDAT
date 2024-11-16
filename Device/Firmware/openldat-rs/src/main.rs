@@ -40,6 +40,13 @@ static mut USB_BUS: Option<UsbBusAllocator<hal::usb::UsbBus>> = None;
 /// The USB Serial Device Driver (shared with the interrupt).
 static mut USB_SERIAL: Option<SerialPort<hal::usb::UsbBus>> = None;
 
+// For ADC
+use embedded_hal_0_2::adc::OneShot;
+
+// Global var to track the latest ADC read value for the main loop to write, ISR to read
+use core::sync::atomic::{AtomicU16, Ordering};
+static LATEST_ADC_VALUE: AtomicU16 = AtomicU16::new(0);
+
 /// Entry point to our bare-metal application.
 ///
 /// The `#[entry]` macro ensures the Cortex-M start-up code calls this function
@@ -131,8 +138,15 @@ fn main() -> ! {
     // Our button input
     let mut button_pin = pins.gpio17.into_pull_up_input();
 
+    // Initialize the ADC for the light sensor
+    let mut adc = hal::Adc::new(pac.ADC, &mut pac.RESETS);
+
+    // Configure analog input for our light sensor
+    let mut light_sensor_adc_pin = hal::adc::AdcPin::new(pins.gpio26).unwrap();
+
     // Run forever, setting the LED according to the button
     loop {
+        // Light the LED if the input button is pressed
         if button_pin.is_low().unwrap() {
             led_pin.set_high().unwrap();
             led_pin2.set_high().unwrap();
@@ -140,6 +154,10 @@ fn main() -> ! {
             led_pin.set_low().unwrap();
             led_pin2.set_low().unwrap();
         }
+
+        // Read the ADC value and write it into the global var
+        let light_level: u16 = adc.read(&mut light_sensor_adc_pin).unwrap();
+        LATEST_ADC_VALUE.store(light_level, Ordering::Relaxed);
     }
 }
 
@@ -190,6 +208,14 @@ unsafe fn USBCTRL_IRQ() {
                         wr_ptr = &wr_ptr[len..];
                     });
                 }
+
+                // Print the current light sensor value
+                serial.write(b"\r\n").ok();
+                let value = LATEST_ADC_VALUE.load(Ordering::Relaxed);
+                let mut buffer = itoa::Buffer::new();
+                let value_str = buffer.format(value);
+                serial.write(value_str.as_bytes()).ok();
+                serial.write(b"\r\n").ok();
             }
         }
     }
